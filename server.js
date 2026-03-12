@@ -4,27 +4,27 @@ const PORT =3000;
 
 const server = http.createServer((request,response)=>{
     console.log("Request url : " + request.url);
-    console.log("Request method : " +request.method );
+    console.log("Request method : " + request.method );
 
     if(request.url === '/' && request.method === 'GET'){
         
         fs.readFile('index.html', (err, data) => {
 
             if (err) {
-                res.statusCode = 500;
-                res.end('Internal Server Error');
+                response.statusCode = 500;
+                response.end('Internal Server Error');
                 return;
             }
-            res.statusCode = 200;
-            res.end(data);
+            response.statusCode = 200;
+            response.end(data);
         });
     }
 
-    else if(request.url==='/api' && request.method==='POST'){
+    else if(request.url==='/api' && request.method==='GET'){
         const student={
             name:"Noora Badr",
             StudentId:12326084
-        }
+        };
         response.setHeader('content-Type','application/json');
         response.statusCode=200;
         response.end(JSON.stringify(student));
